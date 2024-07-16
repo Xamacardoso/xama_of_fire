@@ -8,17 +8,23 @@ var _move = _right - _left;
 hsp = _move * walk_speed;
 vsp = vsp + grv;
 
+// If is on floor
+if (place_meeting(x,y+1,oWall)){
+	reset_jumps();
+}
+
 // Horizontal collision
-if (place_meeting(x+hsp,y,obj_wall)){
-	while(!place_meeting(x+sign(hsp), y, obj_wall)){
-		x = x + sign(hsp)
+if (place_meeting(x+hsp,y,oWall)){
+
+	while(!place_meeting(x+sign(hsp), y, oWall)){
+		x = x + sign(hsp);
 	}
 	hsp = 0;
 }
 
 // Vertical collision
-if (place_meeting(x,y+vsp,obj_wall)){
-	while(!place_meeting(x, y+sign(vsp), obj_wall)){
+if (place_meeting(x,y+vsp,oWall)){
+	while(!place_meeting(x, y+sign(vsp), oWall)){
 		y = y + sign(vsp);
 	}
 	vsp = 0;
@@ -33,4 +39,3 @@ if _jump and jump_count > 0{
 // Handles movespeed (horizontal)
 x = x+hsp;
 y = y+vsp;
-
